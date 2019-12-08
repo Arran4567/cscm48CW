@@ -25,6 +25,8 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('img_url');
             $table->string('body');
+            $table->unsignedInteger('likes');
+            $table->unsignedInteger('dislikes');
             $table->timestamps();
 
             /**
