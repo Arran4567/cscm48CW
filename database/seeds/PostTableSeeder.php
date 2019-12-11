@@ -15,6 +15,6 @@ class PostTableSeeder extends Seeder
          * This will use the factory to create 100 random posts.
          */
 
-        factory(App\Post::class, 100)->create();
+        factory(App\Post::class, 40)->create();
     }
 }

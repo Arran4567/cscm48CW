@@ -25,8 +25,6 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('img_url');
             $table->string('body');
-            $table->unsignedInteger('likes');
-            $table->unsignedInteger('dislikes');
             $table->timestamps();
 
             /**
@@ -35,6 +33,9 @@ class CreatePostsTable extends Migration
              */
 
             $table->bigInteger('blog_id')->unsigned();
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->
+                on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('blog_id')->references('id')->on('blogs')
                 ->onDelete('cascade')->onUpdate('cascade');
         });

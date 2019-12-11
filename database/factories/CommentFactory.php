@@ -9,8 +9,7 @@ $factory->define(Comment::class, function (Faker $faker) {
     return [
         //
         'body' => $faker->realText(50),
-        'likes' => $faker->numberBetween($min = 0, $max = 100),
-        'dislikes' => $faker->numberBetween($min = 0, $max = 100),
+        'user_id' => App\User::inRandomOrder()->first()->id,
         'post_id' => App\Post::inRandomOrder()->first()->id,
     ];
 });
