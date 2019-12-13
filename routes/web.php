@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/{user}', function ($user) {
+    return view('user', ['user' => $user]);
+});
+
