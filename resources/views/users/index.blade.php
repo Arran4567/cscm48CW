@@ -9,4 +9,5 @@
             <li><a href="{{ route('users.show', ['id' => $user->id]) }}">{{$user->name}}</a></li>
         @endforeach
     </ul>
+<a href="{{ route('users.create')}}">Create User</a>
 @endsection
