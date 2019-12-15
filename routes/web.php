@@ -17,4 +17,8 @@ Route::get('/', function () {
 
 Route::get('/blogs', 'BlogController@index');
 
+Route::get('/blogs/{id}', 'BlogController@show')->name('blogs.show');
+
 Route::get('/users', 'UserController@index');
+
+Route::get('/users/{id}', 'UserController@show')->name('users.show');
