@@ -50,7 +50,7 @@ class BlogController extends Controller
     {
         //
         $blog = Blog::findOrFail($id);
-        return view('blog.show', ['blog' => $blog]);
+        return view('blogs.show', ['blog' => $blog]);
     }
 
     /**

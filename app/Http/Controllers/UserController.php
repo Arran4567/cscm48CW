@@ -50,7 +50,7 @@ class UserController extends Controller
     {
         //
         $user = User::findOrFail($id);
-        return view('user.show', ['user' => $user]);
+        return view('users.show', ['user' => $user]);
     }
 
     /**
