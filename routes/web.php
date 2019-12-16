@@ -24,3 +24,8 @@ Route::get('/users', 'UserController@index')->name('users.index');
 Route::get('users/create', 'UserController@create')->name('users.create');
 Route::post('users', 'UserController@store')->name('users.store');
 Route::get('/users/{id}', 'UserController@show')->name('users.show');
+
+Route::get('/posts', 'PostController@index')->name('posts.index');
+Route::get('posts/create/{id}', 'PostController@create')->name('posts.create');
+Route::post('posts', 'PostController@store')->name('posts.store');
+Route::get('/posts/{id}', 'PostController@show')->name('posts.show');

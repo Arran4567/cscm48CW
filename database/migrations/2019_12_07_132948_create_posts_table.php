@@ -23,7 +23,7 @@ class CreatePostsTable extends Migration
              */
             $table->bigIncrements('id');
             $table->string('title');
-            $table->string('img_url');
+            $table->string('img_url')->nullable();
             $table->string('body');
             $table->timestamps();
 
