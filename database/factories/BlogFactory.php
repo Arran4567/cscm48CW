@@ -13,6 +13,7 @@ $factory->define(Blog::class, function (Faker $faker) {
          */
 
          'title' => $faker->realText(20),
+         'description' => $faker->realText(100),
          'user_id' => App\User::inRandomOrder()->first()->id,
     ];
 });

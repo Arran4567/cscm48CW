@@ -11,6 +11,6 @@
     <input type="hidden" value="{{ $blog->id }}" name="blog_id">
     <input type="hidden" value="{{ $blog->user_id }}" name="user_id">
     <input type="submit" value="Submit">
-    <a href="{{ route('posts.index') }}">Cancel</a>
+    <input class="button" type="button" onclick="window.location.replace('{{ route('blogs.show', ['id' => $blog->id]) }}')" value="Cancel" />
 </form>
 @endsection

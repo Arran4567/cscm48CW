@@ -12,6 +12,7 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
@@ -27,6 +28,7 @@ class BlogController extends Controller
     public function create()
     {
         //
+        return view('blogs.create');
     }
 
     /**
@@ -38,6 +40,21 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         //
+        $validatedData = $request->validate([
+            'title' => 'required|max:70',
+            'description' => 'required|max:100',
+            'user_id' => 'required|integer',
+        ]);
+
+        $blog = new Blog;
+        $blog->title = $validatedData['title'];
+        $blog->description = $validatedData['description'];
+        $blog->user_id = $validatedData['user_id'];
+        
+        $blog->save();
+
+        session()->flash('message', 'Blog Created Successfully!');
+        return view('blogs.show', ['blog' => $blog]);
     }
 
     /**

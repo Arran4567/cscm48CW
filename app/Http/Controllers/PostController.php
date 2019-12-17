@@ -14,6 +14,7 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         //
@@ -60,7 +61,7 @@ class PostController extends Controller
         $post->save();
 
         session()->flash('message', 'Post Created Successfully!');
-        return redirect()->route('posts.index');
+        return view('posts.show', ['post' => $post]);
     }
 
     /**
