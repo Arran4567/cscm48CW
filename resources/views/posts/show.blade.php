@@ -13,3 +13,36 @@
         @endif
     </ul>
 @endsection
+
+@section('comments')
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <h2>Comments</h2>
+
+    <div id="root">
+        <ul>
+            <li v-for="comment in comments">@{{ comment.body }}</li>
+        </ul>
+    </div>
+    <script>
+        var app = new Vue({
+            el: "#root",
+            data: {
+                comments: [],
+            },
+            mounted() {
+                axios.get("{{route('api.comments.index')}}")
+                .then(response => {
+                    //handle success
+                    console.log(response)
+                    this.comments = response.data;
+                })
+                .catch(response => {
+                    //handle errors
+                    console.log(response);
+                })
+            }
+        });
+    </script>
+@endsection
+
