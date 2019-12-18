@@ -21,28 +21,55 @@
 
     <div id="root">
         <ul>
-            <li v-for="comment in comments">@{{ comment.body }}</li>
+            <li v-for="comment in comments">
+                <a>@{{ comment.body }}</a>
+                <br/>
+                Posted By: @{{comment.user_id}}
+            </li>
         </ul>
+        <br/>
+        <h3>New comment</h3>
+        <input type="text" id="input" v-model="newCommentBody">
+        <button @click="createComment">Post</button>
     </div>
     <script>
         var app = new Vue({
             el: "#root",
             data: {
                 comments: [],
+                newCommentBody: '',
             },
             mounted() {
-                axios.get("{{route('api.comments.index')}}")
+                axios.get("{{route('api.comments.show', ['id' => $post->id])}}")
                 .then(response => {
                     //handle success
-                    console.log(response)
                     this.comments = response.data;
                 })
                 .catch(response => {
                     //handle errors
                     console.log(response);
                 })
+            },
+            methods: {
+                createComment: function(){
+                    axios.post("{{route('api.comments.store')}}", {
+                        body: this.newCommentBody,
+                        post_id: {{$post->id}},
+                        user_id: {{Auth::id()}},
+                    })
+                    .then(response => {
+                        //handle success
+                        console.log(response.data)
+                        this.comments.push(response.data);
+                        this.newCommentBody = '';
+                    })
+                    .catch(response => {
+                        //handles errors
+                        console.log(response);
+                    })
+                },
             }
-        });
+        })
     </script>
 @endsection
 

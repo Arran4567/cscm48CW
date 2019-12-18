@@ -2,16 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use App\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-
     public function apiIndex()
     {
         $comments = Comment::all();
         return $comments;
+    }
+
+    public function apiShow($id)
+    {
+        $post = Post::findOrFail($id);
+        $comments = $post->comments;
+        return $comments;
+    }
+
+    public function apiStore(Request $request)
+    {
+        $c = new Comment;
+        $c->body = $request['body'];
+        $c->post_id = $request['post_id'];
+        $c->user_id = $request['user_id'];
+
+        $c->save();
+        return $c;
     }
 
     /**
@@ -52,7 +70,7 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function show(Comment $comment)
+    public function show(Comment $id)
     {
         //
     }

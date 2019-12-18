@@ -18,3 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('comments', 'CommentController@apiIndex')->name('api.comments.index');
+Route::post('comments', 'CommentController@apiStore')->name('api.comments.store');
+Route::get('comments/{id}', 'CommentController@apiShow')->name('api.comments.show');
+Route::post('comments/{id}', 'CommentController@apiEdit')->name('api.comments.edit');
