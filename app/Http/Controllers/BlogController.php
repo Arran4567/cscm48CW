@@ -16,8 +16,8 @@ class BlogController extends Controller
     public function index()
     {
         //
-        $blogs = Blog::all();
-        return view('blogs.index', ['blogs' => $blogs]);
+        $data = Blog::paginate(10);
+        return view('blogs.index',compact('data'));
     }
 
     /**
@@ -102,5 +102,8 @@ class BlogController extends Controller
     public function destroy($id)
     {
         //
+        $blog = Blog::findOrFail($id);
+        $blog->delete();
+        return redirect()->route('blogs.index')->with('message', 'Blog was deleted.');
     }
 }

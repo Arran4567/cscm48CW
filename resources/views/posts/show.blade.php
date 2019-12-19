@@ -22,15 +22,19 @@
     <div id="root">
         <ul>
             <li v-for="comment in comments">
-                <a>@{{ comment.body }}</a>
+                @{{ comment.body }}
                 <br/>
                 Posted By: @{{comment.user_id}}
+                <br/>
             </li>
         </ul>
         <br/>
         <h3>New comment</h3>
-        <input type="text" id="input" v-model="newCommentBody">
-        <button @click="createComment">Post</button>
+        <form method="POST">
+            @csrf
+            <input type="text" id="input" v-model="newCommentBody">
+            <button @click="createComment">Post</button>
+        </form>
     </div>
     <script>
         var app = new Vue({
@@ -68,7 +72,7 @@
                         console.log(response);
                     })
                 },
-            }
+            },
         })
     </script>
 @endsection
