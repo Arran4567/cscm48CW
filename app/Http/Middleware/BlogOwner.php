@@ -20,7 +20,7 @@ class BlogOwner
         if( $request->user()->id == $blog->user_id ){
             return $next($request);
         }else{
-            return response("This is not your blog. You cannot post here.");
+            return response("This is not your blog. You cannot post or edit any content here.");
         }
     }
 }

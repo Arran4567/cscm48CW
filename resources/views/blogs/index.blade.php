@@ -13,32 +13,24 @@
         </thead>
         <tbody>
             @if(!empty($data) && $data->count())
-                @foreach($data as $value)
+                @foreach($data as $blog)
                     <tr>
-                        <td><a href="{{ route('blogs.show', ['id' => $value ->id]) }}">{{ $value->title }}</a></td>
-                            @if($value->user_id == Auth::id())
+                        <td>
+                            <a href="{{ route('blogs.show', ['id' => $blog ->id]) }}"><h3>{{ $blog->title }}</h3></a>
+                            <p>{{$blog->description}} By: {{$blog->user->name}}</p>
+                        </td>
+                            @if($blog->user_id == Auth::id())
                                 <td>
-                                    <table>
-                                        <tr>
-                                            <form method="POST" action="{{route('blogs.destroy', ['id' =>  $value->id])}}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Delete</button>
-                                            </form>
-                                        </tr>
-                                        <tr>
-                                            <form method="POST" action="{{route('blogs.edit', ['id' =>  $value->id])}}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">Edit</button>
-                                            </form>
-                                        </tr>
-                                    </table>
-                                    
+                                    <button class="btn btn-danger" onclick="window.location.replace('{{  route('blogs.edit', ['id' => $blog->id]) }}')">Edit</button>
+                                    <form method="POST" action="{{route('blogs.destroy', ['id' =>  $blog->id])}}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-danger" type="submit">Delete</button>
+                                    </form>
                                 </td>
                             @else
                                 <td>
-                                <button class="btn btn-danger" disabled>Delete</button>
+                                <button class="btn btn-danger" disabled>Edit</button>
                                 <button class="btn btn-danger" disabled>Delete</button>
                                 </td>
                             @endif

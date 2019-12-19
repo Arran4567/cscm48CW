@@ -16,7 +16,7 @@ class BlogController extends Controller
     public function index()
     {
         //
-        $data = Blog::paginate(10);
+        $data = Blog::paginate(5);
         return view('blogs.index',compact('data'));
     }
 
@@ -79,6 +79,8 @@ class BlogController extends Controller
     public function edit($id)
     {
         //
+        $blog = Blog::findOrFail($id);
+        return view('blogs.edit', ['blog' => $blog]);
     }
 
     /**
@@ -91,6 +93,21 @@ class BlogController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validatedData = $request->validate([
+            'title' => 'required|max:70',
+            'description' => 'required|max:100',
+            'user_id' => 'required|integer',
+        ]);
+
+        $blog = Blog::findOrFail($id);
+        $blog->title = $validatedData['title'];
+        $blog->description = $validatedData['description'];
+        $blog->user_id = $validatedData['user_id'];
+        
+        $blog->save();
+
+        session()->flash('message', 'Blog Updated Successfully!');
+        return view('blogs.show', ['blog' => $blog]);
     }
 
     /**

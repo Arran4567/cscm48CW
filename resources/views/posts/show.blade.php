@@ -30,8 +30,9 @@
         </ul>
         <br/>
         <h3>New comment</h3>
-        <form method="POST">
+        <form>
             @csrf
+            @method('POST')
             <input type="text" id="input" v-model="newCommentBody">
             <button @click="createComment">Post</button>
         </form>
