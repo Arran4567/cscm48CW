@@ -23,20 +23,21 @@ Route::get('/', function () {
 Route::get('blogs', 'BlogController@index')->name('blogs.index');
 Route::get('blogs/create', 'BlogController@create')->name('blogs.create')->middleware('auth');
 Route::post('blogs', 'BlogController@store')->name('blogs.store')->middleware('auth');
-Route::put('blogs/update/{id}', 'BlogController@update')->name('blogs.update')->middleware('owner');
-Route::get('blogs/edit/{id}', 'BlogController@edit')->name('blogs.edit')->middleware('owner');
+Route::put('blogs/update/{id}', 'BlogController@update')->name('blogs.update')->middleware('blogOwner');
+Route::get('blogs/edit/{id}', 'BlogController@edit')->name('blogs.edit')->middleware('blogOwner');
 Route::get('blogs/{id}', 'BlogController@show')->name('blogs.show');
-Route::delete('blogs/{id}', 'BlogController@destroy')->name('blogs.destroy')->middleware('owner');
+Route::delete('blogs/{id}', 'BlogController@destroy')->name('blogs.destroy')->middleware('blogOwner');
 
 Route::get('posts', 'PostController@index')->name('posts.index');
-Route::get('posts/create/{id}', 'PostController@create')->name('posts.create')->middleware('auth');
 Route::post('posts', 'PostController@store')->name('posts.store')->middleware('auth');
-Route::put('posts/update/{id}', 'PostController@update')->name('posts.update')->middleware('owner');
-Route::get('posts/edit/{id}', 'PostController@edit')->name('posts.edit')->middleware('owner');
+Route::put('posts/update/{id}', 'PostController@update')->name('posts.update')->middleware('postOwner');
+Route::get('posts/edit/{id}', 'PostController@edit')->name('posts.edit')->middleware('postOwner');
+Route::get('posts/create/{id}', 'PostController@create')->name('posts.create')->middleware('auth');
 Route::get('posts/{id}', 'PostController@show')->name('posts.show');
-Route::delete('posts/{id}', 'PostController@destroy')->name('posts.destroy')->middleware('owner');
+Route::delete('posts/{id}', 'PostController@destroy')->name('posts.destroy')->middleware('postOwner');
 
-Route::get('/comments', 'CommentController@index')->name('comments.index');
+Route::get('comments', 'CommentController@index')->name('comments.index');
+Route::get('comments/{id}', 'CommentController@user')->name('comments.user');
 
 Auth::routes();
 

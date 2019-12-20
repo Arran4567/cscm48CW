@@ -99,5 +99,8 @@
     <div>
         @yield('comments')
     </div>
+    <div>
+        @yield('new_comments')
+    </div>
 </body>
 </html>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use App\Comment;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,7 @@ class CommentController extends Controller
     {
         $c = new Comment;
         $c->body = $request['body'];
+        $c->user_name = User::findOrFail($request['user_id'])->name;
         $c->post_id = $request['post_id'];
         $c->user_id = $request['user_id'];
 

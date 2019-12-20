@@ -30,7 +30,7 @@
             <li v-for="comment in comments">
                 @{{ comment.body }}
                 <br/>
-                Posted By: @{{comment.user_id}}
+                Posted By: @{{comment.user_name}}
                 <br/>
             </li>
         </ul>

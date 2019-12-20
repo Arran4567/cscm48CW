@@ -108,7 +108,7 @@ class PostController extends Controller
             'user_id' => 'required|integer',
         ]);
 
-        $post = findOrFail($id);
+        $post = Post::findOrFail($id);
         $post->title = $validatedData['title'];
         $post->img_url = $validatedData['img_url'];
         $post->body = $validatedData['body'];
@@ -132,6 +132,6 @@ class PostController extends Controller
         //
         $post = Post::findOrFail($id);
         $post->delete();
-        return redirect()->route('blogs.index')->with('message', 'Post was deleted.');
+        return redirect()->route('blogs.show', ['id' => $post->blog_id])->with('message', 'Post was deleted.');
     }
 }
