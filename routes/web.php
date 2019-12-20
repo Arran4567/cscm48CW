@@ -33,7 +33,7 @@ Route::post('posts', 'PostController@store')->name('posts.store')->middleware('a
 Route::put('posts/update/{id}', 'PostController@update')->name('posts.update')->middleware('postOwner');
 Route::get('posts/edit/{id}', 'PostController@edit')->name('posts.edit')->middleware('postOwner');
 Route::get('posts/create/{id}', 'PostController@create')->name('posts.create')->middleware('auth');
-Route::get('posts/{id}', 'PostController@show')->name('posts.show');
+Route::get('posts/{id}', 'PostController@show')->name('posts.show')->middleware('auth');
 Route::delete('posts/{id}', 'PostController@destroy')->name('posts.destroy')->middleware('postOwner');
 
 Route::get('comments', 'CommentController@index')->name('comments.index');
