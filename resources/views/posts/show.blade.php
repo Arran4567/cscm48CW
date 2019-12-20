@@ -12,6 +12,12 @@
             <li>Image: <img src='{{$post->img_url}}' width='320' height='240' alt='Image for post: {{$post->title}}'></li>
         @endif
     </ul>
+    <button class="btn btn-danger" onclick="window.location.replace('{{  route('posts.edit', ['id' => $post->id]) }}')">Edit</button>
+    <form method="POST" action="{{route('posts.destroy', ['id' =>  $post->id])}}">
+        @csrf
+        @method('DELETE')
+        <button class="btn btn-danger" type="submit">Delete</button>
+    </form>
 @endsection
 
 @section('comments')
@@ -34,7 +40,7 @@
             @csrf
             @method('POST')
             <input type="text" id="input" v-model="newCommentBody">
-            <button @click="createComment">Post</button>
+            <button type="submit" @click="createComment">Post</button>
         </form>
     </div>
     <script>

@@ -86,6 +86,8 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        $post = Post::findOrFail($id);
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
@@ -98,6 +100,25 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $validatedData = $request->validate([
+            'title' => 'required|max:70',
+            'img_url' => 'Nullable|url',
+            'body' => 'required|max:300',
+            'blog_id' => 'required|integer',
+            'user_id' => 'required|integer',
+        ]);
+
+        $post = findOrFail($id);
+        $post->title = $validatedData['title'];
+        $post->img_url = $validatedData['img_url'];
+        $post->body = $validatedData['body'];
+        $post->blog_id = $validatedData['blog_id'];
+        $post->user_id = $validatedData['user_id'];
+        
+        $post->save();
+
+        session()->flash('message', 'Post Created Successfully!');
+        return view('posts.show', ['post' => $post]);
     }
 
     /**
@@ -109,5 +130,8 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect()->route('blogs.index')->with('message', 'Post was deleted.');
     }
 }
