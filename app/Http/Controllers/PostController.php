@@ -74,6 +74,10 @@ class PostController extends Controller
     {
         //
         $post = Post::findOrFail($id);
+        $post->update([
+            // Increment the view counter field
+            'views' => $post->views + 1,
+        ]);
         return view('posts.show', ['post' => $post]);
     }
 

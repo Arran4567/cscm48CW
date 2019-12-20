@@ -25,6 +25,7 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->string('img_url')->nullable();
             $table->string('body');
+            $table->integer('views');
             $table->timestamps();
 
             /**

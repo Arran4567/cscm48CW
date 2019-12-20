@@ -10,6 +10,8 @@ class Post extends Model
      * Get the blog this post belongs to.
      */
 
+    protected $fillable = ['views'];
+
     public function user(){
         return $this->belongsTo('App\User');
     }

@@ -8,6 +8,7 @@
         <li>ID: {{$post->id}}</li>
         <li>Title: {{$post->title}}</li>
         <li>Body: {{$post->body}}</li>
+        <li>Views: {{$post->views}}</li>
         @if(!empty($post->img_url))
             <li>Image: <img src='{{$post->img_url}}' width='320' height='240' alt='Image for post: {{$post->title}}'></li>
         @endif

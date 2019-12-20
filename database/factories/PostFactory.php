@@ -19,6 +19,7 @@ $factory->define(Post::class, function (Faker $faker) {
          'title' => $faker->realText(20),
          'body' => $faker->realText(200),
          'img_url' => $faker->imageURL($width = 640, $height = 480),
+         'views' => $faker->numberBetween($min = 0, $max = 100),
          'user_id' => App\User::inRandomOrder()->first()->id,
          'blog_id' => App\Blog::inRandomOrder()->first()->id,
     ];
